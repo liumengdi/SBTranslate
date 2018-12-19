@@ -8,15 +8,26 @@
 
 import UIKit
 import AVFoundation
+import Alamofire
 
 class ViewController: UIViewController {
 
     @IBOutlet weak var searchBar: UITextField!
+    @IBOutlet weak var defintionLabel: UILabel!
+    @IBOutlet weak var addBtn: UIButton!
     
     let SB_WROD_QUERY_URL = "https://api.shanbay.com/bdc/search/"
     let SB_WORD_LEARNING_URL = "https://api.shanbay.com/bdc/learning/"
     
     var wordDefinition:[String:Any]? = nil
+    var wordId:Int = 0
+    var audioSource:String = ""
+    
+    var player:AVPlayer?
+    var playerItem:AVPlayerItem?
+    var playButton:UIButton?
+
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,85 +43,64 @@ class ViewController: UIViewController {
         }
     }
     
-    
-    @IBAction func pronunce(_ sender: UIButton) {
-        
-        
-//        if let definition = wordDefinition {
-//            if let audio = definition["audio"] {
-//                let url = NSURL(string: audio as! String)
-//
-//            }
-//        }
+    @IBAction func play(_ sender: Any) {
+        self.pronunce(source: self.audioSource)
     }
     
+    func pronunce(source:String?) {
+        let url = URL(string: self.audioSource)
+        let playerItem:AVPlayerItem = AVPlayerItem(url: url!)
+        player = AVPlayer(playerItem: playerItem)
+        player!.play()
+    }
+    
+    
+    
+    
+    
     func requestForTranslate(word:String) {
-//        let data: [String:Any]  = ["word": word]
-        
-        if var urlComponents = URLComponents(string: SB_WROD_QUERY_URL) {
-            urlComponents.query = "word=\(word)"
-            // 3
-            
-            // 1
-            let defaultSession = URLSession(configuration: .default)
-            // 2
-            var dataTask: URLSessionDataTask?
-            
-            guard let url = urlComponents.url else { return }
-            // 4
-            dataTask = defaultSession.dataTask(with: url) { data, response, error in
-                defer { dataTask = nil }
-                // 5
-                if let error = error {
-                    print(error)
-//                    self.errorMessage += "DataTask error: " + error.localizedDescription + "\n"
-                } else if let data = data,
-                    let response = response as? HTTPURLResponse,
-                    response.statusCode == 200 {
-                        print(data)
-//                    self.updateSearchResults(data)
-                    // 6
-                    DispatchQueue.main.async {
-//                        completion(self.tracks, self.errorMessage)
+        let param: [String:Any]  = ["word": word]
+        AF.request(SB_WROD_QUERY_URL,method: .get,parameters: param)
+            .validate()
+            .responseJSON { response in
+                if response.result.value != nil {
+                    let body = response.result.value as! [String:Any]
+                    let code = body["status_code"] as! Int
+                    if code == 0 {
+                        let result = body["data"] as! [String:Any]
+                        let defination = result["definition"]
+                        let wordId = result["id"]
+                        self.wordId = wordId as! Int
+                        let audioSource = result["audio"] as! String
+                        self.audioSource = audioSource
+                        self.pronunce(source: audioSource)
+                        self.defintionLabel.text = defination as? String
+                    }else {
+                          self.defintionLabel.text = "没有查到这个单词"
                     }
                 }
-            }
-            // 7
-            dataTask?.resume()
         }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-//
-//
-//        let config = URLSessionConfiguration.default
-//        let urlString = SB_WROD_QUERY_URL + word
-//        let url = URL(string: urlString)!
-//        let request = URLRequest(url: url)
-////        request.setValue("application/x-www-form-urlencoded", forHTTPHeaderField: "Content-Type")
-////        request.httpMethod = "GET"
-//
-//        let session = URLSession(configuration: config)
-//        let task = session.dataTask(with: request) { (data,response,error) in
-//            let dictionary = try? JSONSerialization.jsonObject(with: data!, options: .mutableContainers)
-//            print(dictionary!)
-//
-//        }
-//
-//        task.resume()
-        
-        
     }
     
     @IBAction func addCurrentWordToLearningList(_ sender: UIButton) {
-        
+        let param:[String:Any] = [
+            "id": self.wordId,
+            "access_token":"FsGmwUTQO744BJCDdW6FHV9L4hM45P"
+        ]
+        AF.request(SB_WORD_LEARNING_URL,method: .post,parameters: param)
+            .validate()
+            .responseJSON { response in
+                print(response)
+                if response.result.value != nil {
+                    let body = response.result.value as! [String:Any]
+                    let code = body["status_code"] as! Int
+                    
+                    if code == 0 {
+                        self.addBtn.isEnabled = false
+                        self.addBtn.titleLabel?.text = "Done"
+                    }
+                }
+        }
         
     }
     

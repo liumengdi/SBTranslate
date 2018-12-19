@@ -39,12 +39,14 @@
                                     <action selector="addCurrentWordToLearningList:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IYK-S8-pDO"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="chV-20-8qJ">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="chV-20-8qJ" userLabel="DefintionLabel">
                                 <rect key="frame" x="20" y="160" width="728" height="110"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="110" id="RW0-UD-JSc"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="39"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -56,7 +58,7 @@
                                 </constraints>
                                 <state key="normal" title="pronunce"/>
                                 <connections>
-                                    <action selector="pronunce:" destination="BYZ-38-t0r" eventType="touchUpInside" id="G3g-uj-XKy"/>
+                                    <action selector="play:" destination="BYZ-38-t0r" eventType="touchUpInside" id="VVk-Ww-H08"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -76,6 +78,8 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="addBtn" destination="UBf-83-7BO" id="y2D-3n-ql5"/>
+                        <outlet property="defintionLabel" destination="chV-20-8qJ" id="rc8-xh-MZb"/>
                         <outlet property="searchBar" destination="MGm-sQ-VDG" id="tZA-iM-2Zn"/>
                     </connections>
                 </viewController>
