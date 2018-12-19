@@ -12,6 +12,8 @@ import Alamofire
 
 class ViewController: UIViewController {
 
+    let TOKEN = "FsGmwUTQO744BJCDdW6FHV9L4hM45P"
+    
     @IBOutlet weak var searchBar: UITextField!
     @IBOutlet weak var defintionLabel: UILabel!
     @IBOutlet weak var addBtn: UIButton!
@@ -28,11 +30,11 @@ class ViewController: UIViewController {
     var playButton:UIButton?
 
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(appMovedToForerground), name: UIApplication.willEnterForegroundNotification, object: nil)
+         notificationCenter.addObserver(self, selector: #selector(appMoveBackground), name: UIApplication.didEnterBackgroundNotification, object: nil)
     }
     
     @objc func appMovedToForerground() {
@@ -42,21 +44,25 @@ class ViewController: UIViewController {
             requestForTranslate(word: word)
         }
     }
-    
+    @objc func appMoveBackground() {
+        self.addBtn.isEnabled = true
+    }
+
     @IBAction func play(_ sender: Any) {
         self.pronunce(source: self.audioSource)
     }
     
+    @IBAction func search(_ sender: Any) {
+        if let text = self.searchBar.text {
+            self.requestForTranslate(word: text)
+        }
+    }
     func pronunce(source:String?) {
         let url = URL(string: self.audioSource)
         let playerItem:AVPlayerItem = AVPlayerItem(url: url!)
         player = AVPlayer(playerItem: playerItem)
         player!.play()
     }
-    
-    
-    
-    
     
     func requestForTranslate(word:String) {
         let param: [String:Any]  = ["word": word]
@@ -85,7 +91,7 @@ class ViewController: UIViewController {
     @IBAction func addCurrentWordToLearningList(_ sender: UIButton) {
         let param:[String:Any] = [
             "id": self.wordId,
-            "access_token":"FsGmwUTQO744BJCDdW6FHV9L4hM45P"
+            "access_token":TOKEN
         ]
         AF.request(SB_WORD_LEARNING_URL,method: .post,parameters: param)
             .validate()
@@ -97,7 +103,7 @@ class ViewController: UIViewController {
                     
                     if code == 0 {
                         self.addBtn.isEnabled = false
-                        self.addBtn.titleLabel?.text = "Done"
+                      
                     }
                 }
         }

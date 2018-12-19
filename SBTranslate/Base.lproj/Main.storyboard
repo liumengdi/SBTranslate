@@ -33,28 +33,39 @@
                                     <constraint firstAttribute="width" constant="150" id="2b8-dh-90k"/>
                                     <constraint firstAttribute="height" constant="75" id="vff-Il-DX8"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="26"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="29"/>
                                 <state key="normal" title="Add"/>
                                 <connections>
                                     <action selector="addCurrentWordToLearningList:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IYK-S8-pDO"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="chV-20-8qJ" userLabel="DefintionLabel">
-                                <rect key="frame" x="20" y="160" width="728" height="110"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="chV-20-8qJ" userLabel="DefintionLabel">
+                                <rect key="frame" x="20" y="160" width="728" height="150"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <color key="tintColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="110" id="RW0-UD-JSc"/>
+                                    <constraint firstAttribute="height" constant="150" id="RW0-UD-JSc"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oyD-Nx-3pa">
-                                <rect key="frame" x="20" y="322" width="100" height="50"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="axw-2j-pjr">
+                                <rect key="frame" x="685" y="76" width="48" height="48"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="100" id="Ywe-5m-S16"/>
-                                    <constraint firstAttribute="height" constant="50" id="r5V-wD-B88"/>
+                                    <constraint firstAttribute="height" constant="48" id="CMR-8f-xSf"/>
+                                    <constraint firstAttribute="width" constant="48" id="TXd-Cl-iYg"/>
+                                </constraints>
+                                <state key="normal" title="Search"/>
+                                <connections>
+                                    <action selector="search:" destination="BYZ-38-t0r" eventType="touchUpInside" id="uvb-B1-fJH"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oyD-Nx-3pa">
+                                <rect key="frame" x="648" y="395" width="100" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="MRk-ch-xlb"/>
+                                    <constraint firstAttribute="width" constant="100" id="mfP-dl-RUu"/>
                                 </constraints>
                                 <state key="normal" title="pronunce"/>
                                 <connections>
@@ -65,14 +76,16 @@
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="UBf-83-7BO" secondAttribute="trailing" constant="20" id="7Rr-JN-UCi"/>
-                            <constraint firstItem="oyD-Nx-3pa" firstAttribute="top" secondItem="chV-20-8qJ" secondAttribute="bottom" constant="52" id="D0J-dB-1OL"/>
                             <constraint firstItem="chV-20-8qJ" firstAttribute="top" secondItem="MGm-sQ-VDG" secondAttribute="bottom" constant="20" id="L0G-qT-ek0"/>
+                            <constraint firstItem="axw-2j-pjr" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="56" id="Pv9-c2-VBn"/>
                             <constraint firstItem="chV-20-8qJ" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="QFg-Yr-lBU"/>
                             <constraint firstItem="MGm-sQ-VDG" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="QOV-tu-wiY"/>
+                            <constraint firstItem="oyD-Nx-3pa" firstAttribute="top" secondItem="UBf-83-7BO" secondAttribute="bottom" constant="20" id="Qzv-ec-kyc"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="oyD-Nx-3pa" secondAttribute="trailing" constant="20" id="WNi-J1-WSd"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="axw-2j-pjr" secondAttribute="trailing" constant="35" id="XZO-dz-p9P"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="chV-20-8qJ" secondAttribute="trailing" constant="20" id="bTT-OR-9BT"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="MGm-sQ-VDG" secondAttribute="trailing" constant="20" id="dIq-NU-6gJ"/>
                             <constraint firstItem="UBf-83-7BO" firstAttribute="top" secondItem="MGm-sQ-VDG" secondAttribute="bottom" constant="160" id="lU3-1t-GnE"/>
-                            <constraint firstItem="oyD-Nx-3pa" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="20" id="rxR-DQ-c8m"/>
                             <constraint firstItem="MGm-sQ-VDG" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="40" id="sFV-dr-YF7"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
